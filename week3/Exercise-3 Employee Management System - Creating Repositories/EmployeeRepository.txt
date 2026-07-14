@@ -1,0 +1,26 @@
+package com.example.employeemanagementsystem.repository;
+
+import com.example.employeemanagementsystem.model.Employee;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+import java.util.List;
+
+@Repository
+public interface EmployeeRepository
+        extends JpaRepository<Employee, Long> {
+
+    // =====================================================
+    // Custom Derived Query Methods
+    // =====================================================
+
+    // Find employees by name
+    List<Employee> findByName(String name);
+
+    // Find an employee by email
+    Employee findByEmail(String email);
+
+    // Find employees by department name
+    List<Employee> findByDepartmentName(String departmentName);
+
+}
