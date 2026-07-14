@@ -1,0 +1,76 @@
+package com.example.employeemanagementsystem.controller;
+
+import com.example.employeemanagementsystem.model.Employee;
+import com.example.employeemanagementsystem.service.EmployeeService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+@RestController
+@RequestMapping("/api/employees")
+public class EmployeeController {
+
+    // =====================================================
+    // Dependency Injection
+    // =====================================================
+
+    private final EmployeeService employeeService;
+
+    @Autowired
+    public EmployeeController(EmployeeService employeeService) {
+        this.employeeService = employeeService;
+    }
+
+    // =====================================================
+    // Get All Employees (Pagination + Sorting)
+    // URL : GET /api/employees
+    // Example:
+    // /api/employees?page=0&size=5&sort=name,asc
+    // =====================================================
+
+    @GetMapping
+    public Page<Employee> getAllEmployees(
+            Pageable pageable) {
+
+        return employeeService.getAllEmployees(pageable);
+    }
+
+    // =====================================================
+    // Search Employees By Name (Pagination + Sorting)
+    // URL : GET /api/employees/search
+    // Example:
+    // /api/employees/search?name=John&page=0&size=5
+    // =====================================================
+
+    @GetMapping("/search")
+    public Page<Employee> getEmployeesByName(
+
+            @RequestParam("name") String name,
+
+            Pageable pageable) {
+
+        return employeeService.getEmployeesByName(
+                name,
+                pageable
+        );
+    }
+
+    // =====================================================
+    // Get All Employees (Sorting Only)
+    // URL : GET /api/employees/sorted?sort=name
+    // =====================================================
+
+    @GetMapping("/sorted")
+    public List<Employee> getAllEmployees(
+
+            @RequestParam("sort") String sort) {
+
+        return employeeService.getAllEmployees(
+                Sort.by(sort)
+        );
+    }
+}
