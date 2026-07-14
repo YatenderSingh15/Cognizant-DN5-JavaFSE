@@ -1,0 +1,36 @@
+package com.example.employeemanagementsystem.repository;
+
+import com.example.employeemanagementsystem.model.Employee;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+import java.util.List;
+
+@Repository
+public interface EmployeeRepository
+        extends JpaRepository<Employee, Long> {
+
+    // =====================================================
+    // Pagination Methods
+    // =====================================================
+
+    // Get all employees with pagination
+    Page<Employee> findAll(Pageable pageable);
+
+    // Get employees by name with pagination
+    Page<Employee> findByName(
+            String name,
+            Pageable pageable
+    );
+
+    // =====================================================
+    // Sorting Methods
+    // =====================================================
+
+    // Get all employees with sorting
+    List<Employee> findAll(Sort sort);
+
+}

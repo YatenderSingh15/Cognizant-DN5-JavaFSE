@@ -1,0 +1,21 @@
+package com.example;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class EmployeeManagementApplication {
+
+    // =====================================================
+    // Main Method
+    // Starts the Spring Boot Application
+    // =====================================================
+
+    public static void main(String[] args) {
+
+        SpringApplication.run(
+                EmployeeManagementApplication.class,
+                args
+        );
+    }
+}

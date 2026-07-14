@@ -1,0 +1,31 @@
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Service;
+
+@Service
+public class EmployeeService {
+
+    // =====================================================
+    // Primary JdbcTemplate (MySQL)
+    // =====================================================
+
+    @Autowired
+    @Qualifier("primaryJdbcTemplate")
+    private JdbcTemplate primaryJdbcTemplate;
+
+    // =====================================================
+    // Secondary JdbcTemplate (H2)
+    // =====================================================
+
+    @Autowired
+    @Qualifier("secondaryJdbcTemplate")
+    private JdbcTemplate secondaryJdbcTemplate;
+
+    // =====================================================
+    // Business Methods
+    // Use primaryJdbcTemplate or secondaryJdbcTemplate
+    // for specific database operations.
+    // =====================================================
+
+}

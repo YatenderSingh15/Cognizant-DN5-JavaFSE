@@ -1,0 +1,27 @@
+package com.example.employeemanagementsystem.projection;
+
+import org.springframework.beans.factory.annotation.Value;
+
+public interface EmployeeProjection {
+
+    // =====================================================
+    // Projection Fields
+    // =====================================================
+
+    Long getId();
+
+    String getName();
+
+    String getEmail();
+
+    String getDepartmentName();
+
+    // =====================================================
+    // Computed Property
+    // Concatenates Employee Name and Email
+    // =====================================================
+
+    @Value("#{target.name + ' (' + target.email + ')'}")
+    String getNameWithEmail();
+
+}

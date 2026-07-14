@@ -1,0 +1,79 @@
+package com.example.employeemanagementsystem.repository;
+
+import com.example.employeemanagementsystem.model.Employee;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
+
+import java.util.List;
+
+@Repository
+public interface EmployeeRepository
+        extends JpaRepository<Employee, Long> {
+
+    // =====================================================
+    // Derived Query Methods
+    // =====================================================
+
+    // Find employees by name
+    List<Employee> findByName(String name);
+
+    // Find employees by department name
+    List<Employee> findByDepartmentName(String departmentName);
+
+    // Find employees whose email contains a keyword
+    List<Employee> findByEmailContaining(String keyword);
+
+    // Find employees whose name starts with a prefix
+    List<Employee> findByNameStartingWith(String prefix);
+
+    // Find employees by department ID
+    List<Employee> findByDepartmentId(Long departmentId);
+
+    // =====================================================
+    // JPQL Custom Queries
+    // =====================================================
+
+    // Search employees by partial name match
+    @Query("SELECT e FROM Employee e WHERE e.name LIKE %:name%")
+    List<Employee> searchByName(
+            @Param("name") String name
+    );
+
+    // Find employees by department name using JOIN
+    @Query("SELECT e FROM Employee e JOIN e.department d " +
+           "WHERE d.name = :departmentName")
+    List<Employee> findByDepartmentName(
+            @Param("departmentName") String departmentName
+    );
+
+    // =====================================================
+    // Native SQL Query
+    // =====================================================
+
+    // Find employees by email domain
+    @Query(
+        value = "SELECT * FROM employees e " +
+                "WHERE e.email LIKE %:domain%",
+        nativeQuery = true
+    )
+    List<Employee> findByEmailDomain(
+            @Param("domain") String domain
+    );
+
+    // =====================================================
+    // Named Queries
+    // =====================================================
+
+    @Query(name = "Employee.findByNameNamedQuery")
+    List<Employee> findByNameNamedQuery(
+            @Param("name") String name
+    );
+
+    @Query(name = "Employee.findByDepartmentNameNamedQuery")
+    List<Employee> findByDepartmentNameNamedQuery(
+            @Param("departmentName") String departmentName
+    );
+
+}

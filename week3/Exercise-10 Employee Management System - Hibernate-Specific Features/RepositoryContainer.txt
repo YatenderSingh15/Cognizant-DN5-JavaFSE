@@ -1,0 +1,26 @@
+package com.example.repository;
+
+import com.example.entity.Employee;
+
+import org.springframework.context.annotation.Primary;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+// =====================================================
+// Repository Container
+// =====================================================
+
+public interface RepositoryContainer {
+
+    // =====================================================
+    // Primary Employee Repository
+    // =====================================================
+
+    @Repository
+    @Primary
+    interface EmployeeRepository
+            extends JpaRepository<Employee, Long> {
+
+    }
+
+}
