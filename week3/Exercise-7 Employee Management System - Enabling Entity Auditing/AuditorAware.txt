@@ -1,0 +1,25 @@
+package com.example.employeemanagementsystem.config;
+
+import org.springframework.context.annotation.Configuration;
+import org.springframework.data.domain.AuditorAware;
+
+import java.util.Optional;
+
+@Configuration
+public class AuditorAwareImpl
+        implements AuditorAware<String> {
+
+    // =====================================================
+    // Returns the current auditor (logged-in user)
+    // Used by Spring Data JPA Auditing
+    // =====================================================
+
+    @Override
+    public Optional<String> getCurrentAuditor() {
+
+        // Fetch the current user from Spring Security
+        // For this example, a static user is returned.
+
+        return Optional.of("System");
+    }
+}
