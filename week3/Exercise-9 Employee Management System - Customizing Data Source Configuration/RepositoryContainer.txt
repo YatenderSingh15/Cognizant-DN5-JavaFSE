@@ -1,0 +1,35 @@
+import org.springframework.context.annotation.Primary;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+// =====================================================
+// Repository Container
+// Contains Primary and Secondary Repositories
+// =====================================================
+
+public class RepositoryContainer {
+
+    // =====================================================
+    // Primary Repository
+    // Uses the Primary DataSource
+    // =====================================================
+
+    @Repository
+    @Primary
+    public interface PrimaryRepository
+            extends JpaRepository<PrimaryEntity, Long> {
+
+    }
+
+    // =====================================================
+    // Secondary Repository
+    // Uses the Secondary DataSource
+    // =====================================================
+
+    @Repository
+    public interface SecondaryRepository
+            extends JpaRepository<SecondaryEntity, Long> {
+
+    }
+
+}

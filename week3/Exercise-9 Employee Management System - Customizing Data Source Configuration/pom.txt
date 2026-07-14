@@ -1,0 +1,31 @@
+<!-- ===================================================== -->
+<!-- Spring Boot Starter Data JPA                          -->
+<!-- Provides JPA, Hibernate, and Repository support       -->
+<!-- ===================================================== -->
+
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-data-jpa</artifactId>
+</dependency>
+
+<!-- ===================================================== -->
+<!-- H2 In-Memory Database                                 -->
+<!-- Used for development and testing                      -->
+<!-- ===================================================== -->
+
+<dependency>
+    <groupId>com.h2database</groupId>
+    <artifactId>h2</artifactId>
+    <scope>runtime</scope>
+</dependency>
+
+<!-- ===================================================== -->
+<!-- MySQL JDBC Driver                                     -->
+<!-- Used to connect Spring Boot with MySQL Database       -->
+<!-- ===================================================== -->
+
+<dependency>
+    <groupId>mysql</groupId>
+    <artifactId>mysql-connector-java</artifactId>
+    <scope>runtime</scope>
+</dependency>
