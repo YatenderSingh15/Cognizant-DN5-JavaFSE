@@ -1,0 +1,50 @@
+package com.example.employeemanagementsystem.controller;
+
+import com.example.employeemanagementsystem.dto.EmployeeDTO;
+import com.example.employeemanagementsystem.projection.EmployeeProjection;
+import com.example.employeemanagementsystem.service.EmployeeService;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
+
+@RestController
+@RequestMapping("/api/employees")
+public class EmployeeController {
+
+    // =====================================================
+    // Dependency Injection
+    // =====================================================
+
+    private final EmployeeService employeeService;
+
+    @Autowired
+    public EmployeeController(EmployeeService employeeService) {
+        this.employeeService = employeeService;
+    }
+
+    // =====================================================
+    // Get All Employees (Interface-Based Projection)
+    // URL : GET /api/employees/projections
+    // =====================================================
+
+    @GetMapping("/projections")
+    public List<EmployeeProjection> getAllEmployeeProjections() {
+
+        return employeeService.getAllEmployeeProjections();
+    }
+
+    // =====================================================
+    // Get All Employees (Class-Based Projection / DTO)
+    // URL : GET /api/employees/dtos
+    // =====================================================
+
+    @GetMapping("/dtos")
+    public List<EmployeeDTO> getAllEmployeeDTOs() {
+
+        return employeeService.getAllEmployeeDTOs();
+    }
+}
