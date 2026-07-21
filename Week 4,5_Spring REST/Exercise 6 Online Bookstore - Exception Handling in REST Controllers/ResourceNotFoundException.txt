@@ -1,0 +1,18 @@
+package com.example.bookstoreapi.exception;
+
+// =====================================================
+// Resource Not Found Exception
+// Used when a requested resource does not exist
+// =====================================================
+
+public class ResourceNotFoundException extends RuntimeException {
+
+    // =====================================================
+    // Constructor
+    // =====================================================
+
+    public ResourceNotFoundException(String message) {
+
+        super(message);
+    }
+}
