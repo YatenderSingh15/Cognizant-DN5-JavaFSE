@@ -1,0 +1,15 @@
+import org.springframework.data.jpa.repository.JpaRepository;
+
+// =====================================================
+// Customer Repository
+// Provides CRUD operations for Customer Entity
+// =====================================================
+
+public interface CustomerRepository extends JpaRepository<Customer, Long> {
+
+    // =====================================================
+    // Additional Custom Query Methods
+    // Add derived query methods here if required.
+    // =====================================================
+
+}

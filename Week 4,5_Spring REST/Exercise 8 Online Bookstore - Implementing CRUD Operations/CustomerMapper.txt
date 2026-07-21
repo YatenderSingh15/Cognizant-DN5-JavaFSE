@@ -1,0 +1,22 @@
+import org.mapstruct.Mapper;
+
+// =====================================================
+// Customer Mapper
+// Converts between Customer Entity and CustomerDTO
+// =====================================================
+
+@Mapper(componentModel = "spring")
+public interface CustomerMapper {
+
+    // =====================================================
+    // Entity to DTO
+    // =====================================================
+
+    CustomerDTO toCustomerDTO(Customer customer);
+
+    // =====================================================
+    // DTO to Entity
+    // =====================================================
+
+    Customer toCustomer(CustomerDTO customerDTO);
+}

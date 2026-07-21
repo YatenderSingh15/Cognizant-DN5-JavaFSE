@@ -1,0 +1,22 @@
+import org.mapstruct.Mapper;
+
+// =====================================================
+// Book Mapper
+// Converts between Book Entity and BookDTO
+// =====================================================
+
+@Mapper(componentModel = "spring")
+public interface BookMapper {
+
+    // =====================================================
+    // Entity to DTO
+    // =====================================================
+
+    BookDTO toBookDTO(Book book);
+
+    // =====================================================
+    // DTO to Entity
+    // =====================================================
+
+    Book toBook(BookDTO bookDTO);
+}
