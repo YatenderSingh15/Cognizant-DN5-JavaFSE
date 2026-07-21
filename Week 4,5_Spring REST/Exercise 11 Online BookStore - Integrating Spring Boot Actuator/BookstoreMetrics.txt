@@ -1,0 +1,35 @@
+package com.example.bookstore.metrics;
+
+import io.micrometer.core.instrument.Counter;
+import io.micrometer.core.instrument.MeterRegistry;
+
+import org.springframework.stereotype.Component;
+
+@Component
+public class BookstoreMetrics {
+
+    // =====================================================
+    // Custom Metrics
+    // =====================================================
+
+    private final Counter booksSoldCounter;
+
+    // =====================================================
+    // Constructor
+    // =====================================================
+
+    public BookstoreMetrics(MeterRegistry meterRegistry) {
+
+        this.booksSoldCounter =
+                meterRegistry.counter("bookstore.books.sold");
+    }
+
+    // =====================================================
+    // Increment Books Sold Counter
+    // =====================================================
+
+    public void incrementBooksSold() {
+
+        booksSoldCounter.increment();
+    }
+}

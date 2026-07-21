@@ -1,0 +1,23 @@
+# =====================================================
+# Spring Boot Actuator Configuration
+# =====================================================
+
+management:
+
+  # ===================================================
+  # Web Endpoint Configuration
+  # ===================================================
+
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+        exclude: "shutdown"
+
+  # ===================================================
+  # Health Endpoint Configuration
+  # ===================================================
+
+  endpoint:
+    health:
+      show-details: always
