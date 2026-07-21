@@ -1,0 +1,150 @@
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
+@RestController
+@RequestMapping("/books")
+public class BookController {
+
+    // =====================================================
+    // In-Memory Data Store
+    // =====================================================
+
+    private final List<Book> books = new ArrayList<>();
+
+    // =====================================================
+    // Constructor
+    // Initializes Sample Data
+    // =====================================================
+
+    public BookController() {
+
+        books.add(
+                new Book(
+                        1,
+                        "Effective Java",
+                        "Joshua Bloch",
+                        45.0,
+                        "978-0134685991"
+                )
+        );
+
+        books.add(
+                new Book(
+                        2,
+                        "Clean Code",
+                        "Robert C. Martin",
+                        40.0,
+                        "978-0132350884"
+                )
+        );
+    }
+
+    // =====================================================
+    // Get All Books
+    // URL : GET /books
+    // =====================================================
+
+    @GetMapping
+    public ResponseEntity<List<Book>> getAllBooks() {
+
+        return new ResponseEntity<>(
+                books,
+                HttpStatus.OK
+        );
+    }
+
+    // =====================================================
+    // Get Book By ID
+    // URL : GET /books/{id}
+    // =====================================================
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Book> getBookById(
+            @PathVariable int id) {
+
+        Optional<Book> book = books.stream()
+                .filter(b -> b.getId() == id)
+                .findFirst();
+
+        return book
+                .map(value -> new ResponseEntity<>(value, HttpStatus.OK))
+                .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    }
+
+    // =====================================================
+    // Create Book
+    // URL : POST /books
+    // =====================================================
+
+    @PostMapping
+    public ResponseEntity<Book> createBook(
+            @RequestBody Book newBook) {
+
+        books.add(newBook);
+
+        return new ResponseEntity<>(
+                newBook,
+                HttpStatus.CREATED
+        );
+    }
+
+    // =====================================================
+    // Update Book
+    // URL : PUT /books/{id}
+    // =====================================================
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Book> updateBook(
+            @PathVariable int id,
+            @RequestBody Book updatedBook) {
+
+        Optional<Book> bookOptional = books.stream()
+                .filter(b -> b.getId() == id)
+                .findFirst();
+
+        if (bookOptional.isPresent()) {
+
+            Book book = bookOptional.get();
+
+            book.setTitle(updatedBook.getTitle());
+            book.setAuthor(updatedBook.getAuthor());
+            book.setPrice(updatedBook.getPrice());
+            book.setIsbn(updatedBook.getIsbn());
+
+            return new ResponseEntity<>(
+                    book,
+                    HttpStatus.OK
+            );
+        }
+
+        return new ResponseEntity<>(
+                HttpStatus.NOT_FOUND
+        );
+    }
+
+    // =====================================================
+    // Delete Book
+    // URL : DELETE /books/{id}
+    // =====================================================
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteBook(
+            @PathVariable int id) {
+
+        boolean removed = books.removeIf(
+                book -> book.getId() == id
+        );
+
+        if (removed) {
+
+            return new ResponseEntity<>(
+                    HttpStatus.NO_CONTENT
+            );
+        }
+
+        return new ResponseEntity<>(
+                HttpStatus.NOT_FOUND
+        );
+    }
+}

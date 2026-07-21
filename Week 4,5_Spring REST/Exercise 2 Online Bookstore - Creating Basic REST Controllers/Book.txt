@@ -1,0 +1,36 @@
+package com.example.bookstoreapi.model;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class Book {
+
+    // =====================================================
+    // Book ID
+    // =====================================================
+
+    private int id;
+
+    // =====================================================
+    // Book Details
+    // =====================================================
+
+    private String title;
+    private String author;
+
+    // =====================================================
+    // Pricing Information
+    // =====================================================
+
+    private double price;
+
+    // =====================================================
+    // ISBN Information
+    // =====================================================
+
+    private String isbn;
+}
