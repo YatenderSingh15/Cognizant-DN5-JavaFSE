@@ -1,0 +1,36 @@
+package com.example.bookstoreapi.model;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class Customer {
+
+    // =====================================================
+    // Customer ID
+    // =====================================================
+
+    private int id;
+
+    // =====================================================
+    // Personal Information
+    // =====================================================
+
+    private String firstName;
+    private String lastName;
+
+    // =====================================================
+    // Contact Information
+    // =====================================================
+
+    private String email;
+
+    // =====================================================
+    // Account Credentials
+    // =====================================================
+
+    private String password;
+}
